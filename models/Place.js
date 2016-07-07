@@ -1,47 +1,35 @@
-//File: controllers/tvshows.js
+//File: models/Place.js
 //Author: Daniel Seijo
 //Version: 1.0
 
-/**
- * Validation
- */
+// Validation
 function validateLength (v) {
-  // a custom validation function for checking string length to be used by the model
   return v.length <= 15;
 }
 
-/**
- * Category Schema
- */
+// Place Schema
 exports = module.exports = function(app, mongoose) {
 
-    var CategorySchema = new mongoose.Schema({
-        // the property name
-        created: {         
-            // types are defined e.g. String, Date, Number (http://mongoosejs.com/docs/guide.html)
-            type: Date,   
-            // default values can be set
-            default: Date.now 
-        },
-        description: {
-            type: String,
-            default: '',
-            // types have specific functions e.g. trim, lowercase, uppercase (http://mongoosejs.com/docs/api.html#schema-string-js)
-            trim: true
-        },
+    var PlaceSchema = new mongoose.Schema({
         name: {
             type: String,
             default: '',
             trim: true,     
             unique : true,
-            // make this a required field
             required: 'name cannot be blank',
-            // wires in a custom validator function (http://mongoosejs.com/docs/api.html#schematype_SchemaType-validate).
-            validate: [validateLength, 'name must be 15 chars in length or less']
+            validate: [validateLength, 'Name must be 15 chars in length or less']
+        },
+        description: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        created: {
+            type: Date,
+            default: Date.now 
         }
     });
-
-    // Expose the model to other objects (similar to a 'public' setter).
-    mongoose.model('Category', CategorySchema);
+    
+    mongoose.model('Place', PlaceSchema);
 
 };

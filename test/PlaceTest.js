@@ -1,37 +1,43 @@
+// Requires
 var should = require('should'),
     express = require('express'),
     app = express(),
     mongoose = require('mongoose');
 
+// Database connection
 mongoose.connect('mongodb://localhost/place', function(err, res) {
-    if (err) throw err;
-    console.log('Connected to Database');
+    if (err) {
+        console.log('Remember to launch mongodb in another terminal');
+        throw err;
+    } else console.log('Connected to Database');
 });
 
+// Added model and created Schema
 var models = require('../models/Place')(app, mongoose);
-var Category  = mongoose.model('Category');
+var Place  = mongoose.model('Place');
 
-describe('Category Model', function() {
+// Asserts
+describe('Place Model', function() {
 
     describe('Saving', function() {
         it('saves new record', function(done) {
-            var category = new Category({
+            var place = new Place({
                 name: 'Beverages',
                 description: 'Soft drinks, coffees, teas, beers, and ales'
             });
 
-            category.save(function(err, saved) {
+            place.save(function(err, saved) {
                 should.not.exist(err);
                 done();
             });
         });
 
         it('throws validation error when name is empty', function(done) {   
-            var category = new Category({
+            var place = new Place({
                 description: 'Soft drinks, coffees, teas, beers, and ales'
             });
 
-            category.save(function(err) {
+            place.save(function(err) {
                 should.exist(err);
                 err.errors.name.message.should.equal('name cannot be blank');
                 done();
@@ -39,26 +45,26 @@ describe('Category Model', function() {
         });
 
         it('throws validation error when name longer than 15 chars', function(done) {
-            var category = new Category({
+            var place = new Place({
                 name: 'Grains/Cereals/Chocolates'
             });
 
-            category.save(function(err, saved) {
+            place.save(function(err, saved) {
                 should.exist(err);
-                err.errors.name.message.should.equal('name must be 15 chars in length or less');
+                err.errors.name.message.should.equal('Name must be 15 chars in length or less');
                 done();
             });
         });
 
-        it('throws validation error for duplicate category name', function(done) {
-            var category = new Category({
+        it('throws validation error for duplicate place name', function(done) {
+            var place = new Place({
                 name: 'Beverages'
             });
 
-            category.save(function(err) {
+            place.save(function(err) {
                 should.not.exist(err);
 
-                var duplicate = new Category({
+                var duplicate = new Place({
                     name: 'Beverages'
                 });
 
@@ -74,7 +80,7 @@ describe('Category Model', function() {
 
     afterEach(function(done) { 
         // NB this deletes ALL categories (but is run against a test database)
-        Category.remove().exec();
+        Place.remove().exec();
         done();
     });
 });
