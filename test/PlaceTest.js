@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/place', function(err, res) {
     console.log('Connected to Database');
 });
 
-var models = require('../models/Category')(app, mongoose);
+var models = require('../models/Place')(app, mongoose);
 var Category  = mongoose.model('Category');
 
 describe('Category Model', function() {
