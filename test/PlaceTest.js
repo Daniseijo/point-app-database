@@ -5,7 +5,7 @@ var should = require('should'),
     mongoose = require('mongoose');
 
 // Database connection
-mongoose.connect('mongodb://localhost/place', function(err, res) {
+mongoose.connect('mongodb://daniseijo:password@ds019143.mlab.com:19143/app_pfc_database/place', function(err, res) {
     if (err) {
         console.log('Remember to launch mongodb in another terminal');
         throw err;
