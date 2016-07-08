@@ -1,4 +1,4 @@
-//File: models/Place.js
+//File: models/Application.js
 //Author: Daniel Seijo
 //Version: 1.0
 
@@ -12,7 +12,7 @@ function validateLength (v) {
 }
 
 // Place Schema
-var PlaceSchema = new mongoose.Schema({
+var ApplicationSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now 
@@ -25,19 +25,23 @@ var PlaceSchema = new mongoose.Schema({
         required: 'Name cannot be blank',
         validate: [validateLength, 'Name must be 15 chars in length or less']
     },
+    uuid: {
+        type: String,
+        default: '',
+        unique : true,
+        validate: {
+            validator: function(v) {
+                return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
+            },
+            message: '{VALUE} is not a valid UUID'
+        },
+        required: 'UUID cannot be blank'
+    },
     description: {
         type: String,
         default: '',
         trim: true
-    },
-    application: {
-        type: Schema.ObjectId,
-        ref: 'Application',
-        required: 'You need to link the place to an application'
-    },
-    major: {type: Number, min: 0, max: 65535, required: 'You need a Major identifier'}
+    }
 });
 
-PlaceSchema.index({application: 1, major: 1}, {unique: true});
-
-mongoose.model('Place', PlaceSchema);
+mongoose.model('Application', ApplicationSchema);

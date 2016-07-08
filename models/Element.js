@@ -1,4 +1,4 @@
-//File: models/Place.js
+//File: models/Element.js
 //Author: Daniel Seijo
 //Version: 1.0
 
@@ -12,7 +12,7 @@ function validateLength (v) {
 }
 
 // Place Schema
-var PlaceSchema = new mongoose.Schema({
+var ElementSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now 
@@ -30,14 +30,18 @@ var PlaceSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
-    application: {
-        type: Schema.ObjectId,
-        ref: 'Application',
-        required: 'You need to link the place to an application'
+    image: {
+        data: Buffer,
+        contentType: String
     },
-    major: {type: Number, min: 0, max: 65535, required: 'You need a Major identifier'}
+    place: {
+        type: Schema.ObjectId,
+        ref: 'Place',
+        required: 'You need to link the element to a place'
+    },
+    minor: {type: Number, min: 0, max: 65535, required: 'You need a Minor identifier'}
 });
 
-PlaceSchema.index({application: 1, major: 1}, {unique: true});
+PlaceSchema.index({place: 1, minor: 1}, {unique: true});
 
-mongoose.model('Place', PlaceSchema);
+mongoose.model('Element', ElementSchema);
