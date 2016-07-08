@@ -42,6 +42,6 @@ var ElementSchema = new mongoose.Schema({
     minor: {type: Number, min: 0, max: 65535, required: 'You need a Minor identifier'}
 });
 
-PlaceSchema.index({place: 1, minor: 1}, {unique: true});
+ElementSchema.index({place: 1, minor: 1}, {unique: true});
 
 mongoose.model('Element', ElementSchema);

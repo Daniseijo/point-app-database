@@ -74,9 +74,9 @@ describe('Application Model', function() {
                 });
 
                 duplicate.save(function(err) {
+                    should.exist(err);
                     err.message.indexOf('Beverages').should.not.equal(-1);
                     err.message.indexOf('duplicate key error').should.not.equal(-1);
-                    should.exist(err);
                     done();
                 });
             });
