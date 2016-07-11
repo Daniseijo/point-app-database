@@ -1,4 +1,4 @@
-//File: controllers/applications.js
+//File: controllers/Application.js
 //Author: Daniel Seijo
 //Version: 1.0
 
@@ -21,12 +21,21 @@ exports.findById = function(req, res) {
     if(err) return res.status(500).send(err);
 
     console.log('GET /application/' + req.params.id);
-        res.status(200).jsonp(application);
+    res.status(200).jsonp(application);
+    });
+};
+
+exports.findByBeacon = function(req, res) {
+    Application.findOne({uuid: req.params.uuid}, function(err, application) {
+    if(err) return res.status(500).send(err);
+
+    console.log('GET /application/' + req.params.uuid);
+    res.status(200).jsonp(application);
     });
 };
 
 //POST - Insert a new Application in the DB
-exports.addApplication = function(req, res, next) {
+exports.addApplication = function(req, res) {
     console.log('POST');
     console.log(req.body);
 

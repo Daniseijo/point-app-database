@@ -30,12 +30,17 @@ var PlaceSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
-    application: {
+    _application: {
         type: Schema.ObjectId,
         ref: 'Application',
         required: 'You need to link the place to an application'
     },
-    major: {type: Number, min: 0, max: 65535, required: 'You need a Major identifier'}
+    major: {
+        type: Number,
+        min: 0,
+        max: 65535,
+        required: 'You need a Major identifier'
+    }
 });
 
 PlaceSchema.index({application: 1, major: 1}, {unique: true});

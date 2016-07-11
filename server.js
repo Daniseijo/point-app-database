@@ -18,7 +18,7 @@ var PlaceModel          = require('./models/Place');
 var ElementModel        = require('./models/Element');
 
 var ApplicationCtrl = require('./controllers/Application');
-// var PlaceCtrl       = require('./controllers/tvshows');
+var PlaceCtrl       = require('./controllers/Place');
 // var ElementCtrl     = require('./controllers/tvshows');
 
 var router = express.Router();
@@ -27,18 +27,24 @@ router.get('/', function(req, res) {
 });
 app.use(router);
 
-var application = express.Router();
+var api = express.Router();
 
-application.route('/application')
+api.route('/application')
   .get(ApplicationCtrl.findAllApplications)
   .post(ApplicationCtrl.addApplication);
 
-application.route('/application/:id')
+api.route('/application/:id')
   .get(ApplicationCtrl.findById)
   .put(ApplicationCtrl.updateApplication)
   .delete(ApplicationCtrl.deleteApplication);
 
-app.use('/api', application);
+api.route('/place')
+    .post(PlaceCtrl.addPlace);
+
+api.route('/place/:uuid/:major')
+    .get(PlaceCtrl.findByBeacon);
+
+app.use('/api', api);
 
 // Start server
 app.listen(3000, function() {

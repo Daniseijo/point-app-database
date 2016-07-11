@@ -34,12 +34,17 @@ var ElementSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    place: {
+    _place: {
         type: Schema.ObjectId,
         ref: 'Place',
         required: 'You need to link the element to a place'
     },
-    minor: {type: Number, min: 0, max: 65535, required: 'You need a Minor identifier'}
+    minor: {
+        type: Number, 
+        min: 0, 
+        max: 65535, 
+        required: 'You need a Minor identifier'
+    }
 });
 
 ElementSchema.index({place: 1, minor: 1}, {unique: true});
