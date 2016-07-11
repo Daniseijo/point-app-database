@@ -25,6 +25,11 @@ var ApplicationSchema = new mongoose.Schema({
         required: 'Name cannot be blank',
         validate: [validateLength, 'Name must be 15 chars in length or less']
     },
+    description: {
+        type: String,
+        default: '',
+        trim: true
+    },
     uuid: {
         type: String,
         default: '',
@@ -36,11 +41,6 @@ var ApplicationSchema = new mongoose.Schema({
             message: '{VALUE} is not a valid UUID'
         },
         required: 'UUID cannot be blank'
-    },
-    description: {
-        type: String,
-        default: '',
-        trim: true
     }
 });
 

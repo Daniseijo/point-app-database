@@ -30,10 +30,10 @@ var ElementSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
-    image: {
-        data: Buffer,
-        contentType: String
-    },
+    // image: {
+    //     data: Buffer,
+    //     contentType: String
+    // },
     _place: {
         type: Schema.ObjectId,
         ref: 'Place',
