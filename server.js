@@ -4,6 +4,10 @@ var express = require('express'),
     methodOverride = require('method-override'),
     mongoose = require('mongoose');
 
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
+
 mongoose.connect('mongodb://daniseijo:password@ds027338.mlab.com:27338/point-app-database', function(err, res) {
     if (err) throw err;
     console.log('Connected to Database');
@@ -79,6 +83,6 @@ api.route('/element/:id')
 app.use('/api', api);
 
 // Start server
-app.listen(3000, function() {
+app.listen(port, function() {
     console.log("Node server running on http://localhost:3000");
 });
