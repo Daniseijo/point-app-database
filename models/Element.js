@@ -52,6 +52,6 @@ var ElementSchema = new mongoose.Schema({
     }
 });
 
-ElementSchema.index({place: 1, minor: 1}, {unique: true, sparse: true});
+ElementSchema.index({_place: 1, minor: 1}, {unique: true});
 
 mongoose.model('Element', ElementSchema);
