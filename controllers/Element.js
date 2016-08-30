@@ -82,6 +82,7 @@ exports.addElement = function(req, res) {
     var element = new Element({
         name:           req.body.name,
         description:    req.body.description,
+        image:          req.body.image,
         _place:         req.body._place,
         minor:          req.body.minor 
     });
@@ -118,6 +119,7 @@ exports.updateElement = function(req, res) {
     Element.findById(req.params.id, function(err, element) {
         element.name        = req.body.name,
         element.description = req.body.description,
+        element.image       = req.body.image,
         element._place      = req.body._place,
         element.minor       = req.body.minor
 

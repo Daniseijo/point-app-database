@@ -63,6 +63,8 @@ exports.addPlace = function(req, res) {
     var place = new Place({
         name:           req.body.name,
         description:    req.body.description,
+        image:          req.body.image,
+        color:          req.body.color,
         _application:   req.body._application,
         major:          req.body.major 
     });
@@ -99,6 +101,8 @@ exports.updatePlace = function(req, res) {
     Place.findById(req.params.id, function(err, place) {
         place.name          = req.body.name,
         place.description   = req.body.description,
+        place.image         = req.body.image,
+        place.color         = req.body.color,
         place._application  = req.body._application,
         place.major         = req.body.major
 

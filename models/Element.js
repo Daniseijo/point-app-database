@@ -30,6 +30,11 @@ var ElementSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
+    image: {
+        type: String,
+        default: '',
+        trim: true
+    },
     // image: {
     //     data: Buffer,
     //     contentType: String

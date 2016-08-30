@@ -30,6 +30,15 @@ var PlaceSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
+    image: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    color: {
+        type: Number,
+        default: 0xFFFFFF
+    },
     _application: {
         type: Schema.ObjectId,
         ref: 'Application',
