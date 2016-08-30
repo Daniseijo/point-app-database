@@ -52,6 +52,6 @@ var PlaceSchema = new mongoose.Schema({
     }
 });
 
-PlaceSchema.index({application: 1, major: 1}, {unique: true});
+PlaceSchema.index({_application: 1, major: 1}, {unique: true});
 
 mongoose.model('Place', PlaceSchema);
