@@ -32,7 +32,7 @@ exports.findByUUIDMajor = function (req, res) {
     Application.findOne({uuid: req.params.uuid}, function(err, application) {
         if(err) return res.status(500).send(err);
         if(!application) return res.status(404).send('Application not found');
-        Place.findOne({_application: application._id, major: res.params.major}, function(err1, place) {
+        Place.findOne({_application: application._id, major: req.params.major}, function(err1, place) {
             if(err1) return res.status(500).send(err1);
             if(!place) return res.status(404).send('Place not found');
             Element.find({_place: place._id}, function(err2, elements) {
