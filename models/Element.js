@@ -30,15 +30,16 @@ var ElementSchema = new mongoose.Schema({
         default: '',
         trim: true
     },
+    type: {
+        type: String,
+        enum : ['normal','timetable'],
+        default: 'normal'
+    },
     image: {
         type: String,
         default: '',
         trim: true
     },
-    // image: {
-    //     data: Buffer,
-    //     contentType: String
-    // },
     _place: {
         type: Schema.ObjectId,
         ref: 'Place',
