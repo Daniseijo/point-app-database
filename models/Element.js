@@ -40,7 +40,7 @@ var ElementSchema = new mongoose.Schema({
             } catch() { 
                 return data;
             }
-        }
+        },
         default: '',
         trim: true
     },
