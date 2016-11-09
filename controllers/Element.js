@@ -125,7 +125,7 @@ exports.updateElement = function(req, res) {
         element._place      = req.body._place,
         element.minor       = req.body.minor
 
-        place.save(function(err) {
+        element.save(function(err) {
             if(err) return res.status(500).send(err);
             res.status(200).jsonp(place);
         });
