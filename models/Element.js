@@ -11,7 +11,7 @@ function validateLength (v) {
   return v.length <= 15;
 }
 
-// Place Schema
+// Element Schema
 var ElementSchema = new mongoose.Schema({
     created: {
         type: Date,
@@ -26,18 +26,11 @@ var ElementSchema = new mongoose.Schema({
         validate: [validateLength, 'Name must be 15 chars in length or less']
     },
     description: {
-        type: String,
-        get: function(data) {
-            try { 
-                return JSON.parse(data);
-            } catch(error) { 
-                return data;
-            }
-        },
+        type: Object,
         set: function(data) {
-            try { 
-                return JSON.stringify(data);
-            } catch(errror) { 
+            try {
+                return JSON.parse(data);
+            }catch (error) {
                 return data;
             }
         },
