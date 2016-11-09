@@ -30,14 +30,14 @@ var ElementSchema = new mongoose.Schema({
         get: function(data) {
             try { 
                 return JSON.parse(data);
-            } catch() { 
+            } catch(error) { 
                 return data;
             }
         },
         set: function(data) {
             try { 
                 return JSON.stringify(data);
-            } catch() { 
+            } catch(errror) { 
                 return data;
             }
         },
