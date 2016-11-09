@@ -27,6 +27,20 @@ var ElementSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+        get: function(data) {
+            try { 
+                return JSON.parse(data);
+            } catch() { 
+                return data;
+            }
+        },
+        set: function(data) {
+            try { 
+                return JSON.stringify(data);
+            } catch() { 
+                return data;
+            }
+        }
         default: '',
         trim: true
     },
