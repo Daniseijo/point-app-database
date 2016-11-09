@@ -127,7 +127,7 @@ exports.updateElement = function(req, res) {
 
         element.save(function(err) {
             if(err) return res.status(500).send(err);
-            res.status(200).jsonp(place);
+            res.status(200).jsonp(element);
         });
     });
 };
