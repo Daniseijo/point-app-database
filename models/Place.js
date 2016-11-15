@@ -8,11 +8,11 @@ var mongoose = require('mongoose'),
 
 // Validation
 function validateLength (v) {
-  return v.length <= 15;
+  return v.length <= 20;
 }
 
 // Place Schema
-var PlaceSchema = new mongoose.Schema({
+var PlaceSchema = new Schema({
     created: {
         type: Date,
         default: Date.now 
@@ -23,7 +23,7 @@ var PlaceSchema = new mongoose.Schema({
         trim: true,     
         unique : true,
         required: 'Name cannot be blank',
-        validate: [validateLength, 'Name must be 15 chars in length or less']
+        validate: [validateLength, 'Name must be 20 chars in length or less']
     },
     description: {
         type: String,
