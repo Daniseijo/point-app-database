@@ -75,27 +75,6 @@ exports.addPlace = function(req, res) {
     });
 };
 
-// //POST - Insert a new Place in the DB
-// exports.addPlace = function(req, res) {
-//     console.log('POST');
-//     console.log(req.body);
-//     Application.findOne({uuid: req.body.uuid}, function(err, application) {
-//         if(err) return res.status(500).send(err);
-//         if(!application) return res.status(404).send('UUID does not match any existing Application.');
-//         var place = new Place({
-//             name:          req.body.name,
-//             description:   req.body.description,
-//             _application:  application._id,
-//             major:         req.body.major 
-//         });
-
-//         place.save(function(err, place) {
-//             if(err) return res.status(500).send(err);
-//             res.status(200).jsonp(place);
-//         });
-//     });
-// };
-
 //PUT - Update a register that already exists
 exports.updatePlace = function(req, res) {
     Place.findById(req.params.id, function(err, place) {
@@ -115,10 +94,8 @@ exports.updatePlace = function(req, res) {
 
 //DELETE - Delete a Place with specified ID
 exports.deletePlace = function(req, res) {
-    Place.findById(req.params.id, function(err, place) {
-        place.remove(function(err) {
-            if(err) return res.status(500).send(err);
-            res.status(200);
-        });
+    Place.findByIdAndRemove(req.params.id, function(err, place) {
+        if(err) return res.status(500).send(err);
+        res.status(200).jsonp(place);
     });
 };

@@ -66,7 +66,6 @@ exports.findByUUIDMajorMinor = function (req, res) {
                     if(err) return res.status(500).send(err);
                     if(!elementPopulate) return res.status(404).send('Element not found');
 
-                    console.log('GET /element/beacon/' + req.params.uuid + '/' + req.params.major + '/' + req.params.minor);
                     res.status(200).jsonp(elementPopulate);
                 });
             });
@@ -94,27 +93,6 @@ exports.addElement = function(req, res) {
     });
 };
 
-// //POST - Insert a new Place in the DB
-// exports.addPlace = function(req, res) {
-//     console.log('POST');
-//     console.log(req.body);
-//     Application.findOne({uuid: req.body.uuid}, function(err, application) {
-//         if(err) return res.status(500).send(err);
-//         if(!application) return res.status(404).send('UUID does not match any existing Application.');
-//         var place = new Place({
-//             name:          req.body.name,
-//             description:   req.body.description,
-//             _application:  application._id,
-//             major:         req.body.major 
-//         });
-
-//         place.save(function(err, place) {
-//             if(err) return res.status(500).send(err);
-//             res.status(200).jsonp(place);
-//         });
-//     });
-// };
-
 //PUT - Update a register that already exists
 exports.updateElement = function(req, res) {
     Element.findById(req.params.id, function(err, element) {
@@ -134,10 +112,8 @@ exports.updateElement = function(req, res) {
 
 //DELETE - Delete an Element with specified ID
 exports.deleteElement = function(req, res) {
-    Element.findById(req.params.id, function(err, element) {
-        element.remove(function(err) {
-            if(err) return res.status(500).send(err);
-            res.status(200);
-        });
+    Element.findByIdAndRemove(req.params.id, function(err, element) {
+        if(err) return res.status(500).send(err);
+        res.status(200).jsonp(element);
     });
 };

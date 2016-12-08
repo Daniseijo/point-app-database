@@ -68,10 +68,8 @@ exports.updateApplication = function(req, res) {
 
 //DELETE - Delete an Application with specified ID
 exports.deleteApplication = function(req, res) {
-    Application.findById(req.params.id, function(err, application) {
-        application.remove(function(err) {
-            if(err) return res.status(500).send(err);
-            res.status(200);
-        });
+    Application.findByIdAndRemove(req.params.id, function(err, application) {
+        if(err) return res.status(500).send(err);
+        res.status(200).jsonp(application);
     });
 };
