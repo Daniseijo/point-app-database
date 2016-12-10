@@ -10,6 +10,7 @@ const ROOT_KEY = '79edc86c9b2930aecdfcf395ffb695a0';
 // process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 8080;
 
+mongoose.Promise = global.Promise
 mongoose.connect('mongodb://daniseijo:password@ds027338.mlab.com:27338/point-app-database', function(err, res) {
     if (err) throw err;
     console.log('Connected to Database');
@@ -99,8 +100,6 @@ api.route('/element/:id')
     .get(ElementCtrl.findById)
     .put(ElementCtrl.updateElement)
     .delete(ElementCtrl.deleteElement);
-
-
 
 app.use('/api', api);
 
