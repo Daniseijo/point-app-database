@@ -5,7 +5,8 @@ var should = require('should'),
     mongoose = require('mongoose');
 
 // Database connection
-mongoose.connect('mongodb://daniseijo:password@ds027338.mlab.com:27338/point-app-database/application', function(err, res) {
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://localhost/point-app', function(err, res) {
     if (err) {
         console.log('Remember to launch mongodb in another terminal');
         throw err;
@@ -46,7 +47,7 @@ describe('Application Model', function() {
             });
         });
 
-        it('throws validation error when name longer than 15 chars', function(done) {
+        it('throws validation error when name longer than 20 chars', function(done) {
             var application = new Application({
                 name: 'Grains/Cereals/Chocolates',
                 uuid: 'F8C1FB17-AFD4-4AB6-BF2F-B0E5AE6DDE6D'
@@ -54,7 +55,7 @@ describe('Application Model', function() {
 
             application.save(function(err, saved) {
                 should.exist(err);
-                err.errors.name.message.should.equal('Name must be 15 chars in length or less');
+                err.errors.name.message.should.equal('Name must be 20 chars in length or less');
                 done();
             });
         });

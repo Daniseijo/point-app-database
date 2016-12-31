@@ -27,7 +27,9 @@ describe('Place Model', function() {
             place = new Place({
                 name: 'Beverages',
                 description: 'Soft drinks, coffees, teas, beers, and ales',
-                application: application,
+                image: 'header_cafeteria',
+                _application: application,
+                color: 0xffb800,
                 major: 1
             });
 
@@ -43,43 +45,18 @@ describe('Place Model', function() {
             });
         });
 
-        // it('throws validation error when name is empty', function(done) {   
-        //     var place = new Place({
-        //         description: 'Soft drinks, coffees, teas, beers, and ales'
-        //     });
-
-        //     place.save(function(err) {
-        //         should.exist(err);
-        //         err.errors.name.message.should.equal('Name cannot be blank');
-        //         done();
-        //     });
-        // });
-
-        // it('throws validation error when name longer than 15 chars', function(done) {
-        //     var place = new Place({
-        //         name: 'Grains/Cereals/Chocolates'
-        //     });
-
-        //     place.save(function(err, saved) {
-        //         should.exist(err);
-        //         err.errors.name.message.should.equal('Name must be 15 chars in length or less');
-        //         done();
-        //     });
-        // });
-
         it('throws validation error for duplicate place name', function(done) {
             place.save(function(err) {
                 should.not.exist(err);
 
                 var duplicate = new Place({
-                    name: 'Comedor',
+                    name: 'Beverages',
                     description: 'Soft drinks, coffees, teas, beers, and ales',
-                    application: application,
+                    _application: application,
                     major: 1
                 });
 
                 duplicate.save(function(err) {
-                    console.log(err);
                     err.message.indexOf('Beverages').should.not.equal(-1);
                     err.message.indexOf('duplicate key error').should.not.equal(-1);
                     should.exist(err);
